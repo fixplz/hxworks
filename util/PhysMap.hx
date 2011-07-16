@@ -19,21 +19,21 @@ class PhysMap
   var world:World;
   var f:Dynamic;
   
-  public function new(s,w,f) {
+  public function new(w,h,s, world,f) {
     size = s;
     map = [];
     
-    world = w;
+    this.world = world;
     this.f = f;
     
-    for(c in 0 ... cast Main.w/size+1) map[c] = [];
+    for(c in 0 ... cast w/size+1) map[c] = [];
     
-    for(x in 0 ... cast Main.w/size+1)
-    for(y in 0 ... cast Main.h/size+1) {
+    for(x in 0 ... cast w/size+1)
+    for(y in 0 ... cast h/size+1) {
       var px = x*size, py = y*size;
       map[x][y] = new TerrainTile(new AABB(px-1,py-1, px+size,py+size));
       
-      map[x][y].rebuild(w,f);
+      map[x][y].rebuild(world,f);
     }
   }
   
