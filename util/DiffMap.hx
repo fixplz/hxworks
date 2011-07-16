@@ -75,17 +75,21 @@ class DiffMap
     try {
       var x1 = map[x+1][y];
       var x2 = map[x-1][y];
-      var dx = adj2(x1) - adj2(x2);
-      //var dx = (x1>0 ? adj2(x1) : map[x][y]) - (x2>0 ? adj2(x2) : map[x][y]);
+      //var dx = adj2(x1) - adj2(x2);
+      var dx = adj2(x1>0 ? x1 : map[x][y]) - adj2(x2>0 ? x2 : map[x][y]);
       var y1 = map[x][y+1];
       var y2 = map[x][y-1];
-      var dy = adj2(y1) - adj2(y2);
-      //var dy = (y1>0 ? adj2(y1) : map[x][y]) - (y2>0 ? adj2(y2) : map[x][y]);
+      //var dy = adj2(y1) - adj2(y2);
+      var dy = adj2(y1>0 ? y1 : map[x][y]) - adj2(y2>0 ? y2 : map[x][y]);
       
-      if(x1==void && dx<0) dx=0;
+      var l = 1;
+      if(dx>l) dx=l else if(dx<-l) dx=-l;
+      if(dy>l) dy=l else if(dy<-l) dy=-l;
+      
+      /*if(x1==void && dx<0) dx=0;
       if(x2==void && dx>0) dx=0;
       if(y1==void && dy<0) dy=0;
-      if(y2==void && dy>0) dy=0;
+      if(y2==void && dy>0) dy=0;*/
       
       return new Vec(dx,dy);
     }
