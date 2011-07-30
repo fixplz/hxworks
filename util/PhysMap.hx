@@ -40,7 +40,8 @@ class PhysMap
   public function rebuild(area:AABB) {
     for(x in cast(area.minx/size) ... cast area.maxx/size+1)
     for(y in cast(area.miny/size) ... cast area.maxy/size+1) {
-      map[x][y].rebuild(world,f);
+      if(map[x][y]!=null)
+        map[x][y].rebuild(world,f);
     }
   }
 }
@@ -59,7 +60,7 @@ class TerrainTile {
     
     var shards = shards;
     
-    var geom = Geom.marchingSquares(box, 5,5, map, 2);
+    var geom = Geom.marchingSquares(box, 20,20, map, 2);
     
     iter(geom, function(g:GeomPoly) {
       var sgeom = { g.simplify(300,2); g.decompose(); }
