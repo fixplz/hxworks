@@ -46,6 +46,7 @@ class Shape {
 	public var area : Float;
 
 	public var groups : Int;
+	public var groupsIgnore : Int;
 
 	function new( type : Int, material : Material ) {
 		id = ID++;

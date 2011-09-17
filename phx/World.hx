@@ -237,8 +237,10 @@ class World implements BroadCallback {
 		var b2 = s2.body;
 
 		testedCollisions++;
-
-		if( b1 == b2 || (s1.groups & s2.groups) == 0 )
+		
+		if(b1 == b2
+		|| (s1.groups & s2.groups) == 0 
+		|| (s1.groupsIgnore & s2.groupsIgnore) != 0)
 			return false;
 
 		// prepare for testShapes
